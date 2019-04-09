@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[AssetLocations] (
+    [AssetLocationId] INT           IDENTITY (7000, 1) NOT NULL,
+    [LocationId]      INT NULL,
+    [AssetId]         INT NULL,
+    [LastSeen]        DATETIME      NULL,
+    CONSTRAINT [PK_AssetLocation] PRIMARY KEY CLUSTERED ([AssetLocationId] ASC), 
+    CONSTRAINT [FK_AssetLocations_Asset] FOREIGN KEY ([AssetId]) REFERENCES [Asset]([AssetId]), 
+    CONSTRAINT [FK_AssetLocations_Location] FOREIGN KEY ([LocationId]) REFERENCES [Location]([LocationId])
+);
