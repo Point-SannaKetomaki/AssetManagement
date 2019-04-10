@@ -18,6 +18,11 @@ namespace AssetManagementWeb.Controllers
             return View();
         }
 
+        public ActionResult Test()
+        {
+            return View();
+        }
+
         // GET: Asset/Details/5
         public ActionResult Details(int id)
         {
@@ -33,11 +38,11 @@ namespace AssetManagementWeb.Controllers
 
         // POST: Asset/Create
         [HttpPost]
-        public JsonResult AssignLocation()
+        public JsonResult AssetLocation()
         {
             string json = Request.InputStream.ReadToEnd();
-            AssignLocationModel inputData =
-                JsonConvert.DeserializeObject<AssignLocationModel>(json);
+            AssetLocationModel inputData =
+                JsonConvert.DeserializeObject<AssetLocationModel>(json);
 
             bool success = false;
             string error = "";
