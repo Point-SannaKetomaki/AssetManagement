@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using AssetManagementWeb.Models;
-
+using System.Globalization;
 
 namespace AssetManagementWeb.Controllers
 {
@@ -23,22 +23,10 @@ namespace AssetManagementWeb.Controllers
             return View();
         }
 
-        // GET: Asset/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Asset/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
 
         // POST: Asset/Create
         [HttpPost]
-        public JsonResult AssetLocation()
+        public JsonResult AssignLocation()
         {
             string json = Request.InputStream.ReadToEnd();
             AssetLocationModel inputData =
@@ -89,64 +77,42 @@ namespace AssetManagementWeb.Controllers
             return Json(result);
         }
 
-        // POST: Asset/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
 
         // GET: Asset/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult List()
         {
-            return View();
-        }
+            List<LocatedAssetsViewModel> model
+                = new List<LocatedAssetsViewModel>();
 
-        // POST: Asset/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
+            AssetManagementEntities entities = new AssetManagementEntities();
             try
             {
-                // TODO: Add update logic here
+                List<AssetLocations> assets = entities.AssetLocations.ToList();
 
-                return RedirectToAction("Index");
+                //muodostetaan näkymämalli tietokannan rivien pohjalta
+                CultureInfo fiFI = new CultureInfo("fi-FI");
+                foreach (AssetLocations asset in assets)
+                {
+                    LocatedAssetsViewModel view = new LocatedAssetsViewModel();
+                    view.Id = asset.AssetLocationId;
+                    view.LocationCode = asset.Location.Code;
+                    view.LocationName = asset.Location.Name;
+                    view.AssetCode = asset.Asset.Code;
+                    view.AssetName = asset.Asset.Type + ": " + asset.Asset.Model;
+                    view.LastSeen = asset.LastSeen.Value.ToString("dd.MM.yyyy");
+                    //view.LastSeen = asset.LastSeen.Value.ToString("fiFI"); //[vaihtoehto]
+
+                    model.Add(view);
+                }
             }
-            catch
+
+            finally
             {
-                return View();
+                entities.Dispose();
             }
+
+                return View(model);
         }
 
-        // GET: Asset/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Asset/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

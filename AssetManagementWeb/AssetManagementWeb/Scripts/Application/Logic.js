@@ -1,4 +1,4 @@
-/// <reference path="../typings/jquery/jquery.d.ts" />
+// <reference path="../typings/jquery/jquery.d.ts" />
 /*Kopioitu AssetLocationModelista ja muokataan typescript muotoon
  * public class AssetLocationModel {
     public string AssetCode { get; set; }
@@ -18,10 +18,10 @@ function initAssetAssignment() {
         var data = new AssetLocationModel();
         data.LocationCode = locationCode;
         data.AssetCode = assetCode;
-        //lähetetäänä json-muotoista dataa palvelimelle
+        //lähetetään json-muotoista dataa palvelimelle
         $.ajax({
             type: "POST",
-            url: "/Asset/AssetLocation",
+            url: "/Asset/AssignLocation",
             data: JSON.stringify(data),
             contentType: "application/json",
             success: function (data) {
