@@ -1,0 +1,26 @@
+[ // validointi
+  {
+    "Id": 7000,
+    "LocationCode": "DigiPoint",
+    "LocationName": "DigiPoint",
+    "AssetCode": "OpeLapTop",
+    "AssetName": "Kannettava: HP ProBook",
+    "LastSeen": "10.04.2019"
+  },
+  {
+    "Id": 7001,
+    "LocationCode": "abcd",
+    "LocationName": "Testisijainti",
+    "AssetCode": "1234",
+    "AssetName": "OpeLäppäri: Lenovo",
+    "LastSeen": "22.04.2019"
+  },
+  {
+    "Id": 8001,
+    "LocationCode": "DigiLab",
+    "LocationName": "DigiLab",
+    "AssetCode": "1234",
+    "AssetName": "OpeLäppäri: Lenovo",
+    "LastSeen": "23.04.2019"
+  }
+]
